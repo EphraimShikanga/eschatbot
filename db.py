@@ -12,15 +12,15 @@ from dotenv import load_dotenv
 from langchain.schema import Document
 from langchain_community.document_loaders import DirectoryLoader
 from langchain_community.vectorstores.chroma import Chroma
-from langchain_google_genai.embeddings import GoogleGenerativeAIEmbeddings
+# from langchain_google_genai.embeddings import GoogleGenerativeAIEmbeddings
 
 # import spacy
-# from langchain_community.embeddings import GooglePalmEmbeddings
+from langchain_community.embeddings import GooglePalmEmbeddings
 # from langchain.text_splitter import RecursiveCharacterTextSplitter
 
-DATA_PATH = "data/books"
+DATA_PATH = "data/pdfs"
 CHROMA_DB_PATH = "database/chroma"
-MAX_CHUNK_SIZE = 500
+MAX_CHUNK_SIZE = 1500
 load_dotenv()
 api_key = os.getenv("GOOGLE_API_KEY")
 # nlp = spacy.load("en_core_web_sm")
@@ -38,9 +38,7 @@ def save_to_chroma_db(chunks: list[Document]):
 
     db = Chroma.from_documents(
         chunks,
-        GoogleGenerativeAIEmbeddings(
-            model="models/embedding-001", google_api_key=api_key
-        ),
+        GooglePalmEmbeddings(google_api_key=api_key),
         persist_directory=CHROMA_DB_PATH,
     )
     db.persist()
@@ -54,7 +52,7 @@ def load_documents():
     Returns:
         list[Document]: A list of documents.
     """
-    loader = DirectoryLoader(DATA_PATH, glob="*.md")
+    loader = DirectoryLoader(DATA_PATH, glob="*.pdf")
     documents = loader.load()
     return documents
 

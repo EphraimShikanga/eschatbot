@@ -1,6 +1,6 @@
-langchain_community
-unstructured # Document loading
+langchain
 chromadb # Vector storage
-openai # For embeddings
 tiktoken  # For embeddings
+spacy # for processing sentence complexity to determine chunk size
+"unstructured[md]" # For markdown
 "unstructured[pdf]" # For PDFs
