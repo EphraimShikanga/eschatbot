@@ -57,7 +57,7 @@ def main():
     prompt_template = ChatPromptTemplate.from_template(PROMPT_TEMPLATE)
     prompt = prompt_template.format(context=context_text, question=query_text)
     # print(f"Prompt: {prompt}")
-    print(f"Context text: {context_text}")
+    # print(f"Context text: {context_text}")
 
     model_one = ChatGoogleGenerativeAI(model="gemini-pro", google_api_key=api_key)
     # model_two = ChatGooglePalm()

@@ -18,7 +18,7 @@ python db.py
 Query the Chroma DB.
 
 ```python
-python chatbot.py "How does Alice meet the Mad Hatter?"
+python chatbot.py "Tell me about paracetamol"
 ```
 
 You'll also need to set up an OpenAI account (and set the OpenAI key in your environment variable) for this to work.
