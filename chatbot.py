@@ -9,10 +9,10 @@ from dotenv import load_dotenv
 from langchain.prompts import ChatPromptTemplate
 
 # from langchain_community.chat_models import ChatGooglePalm
-from langchain_community.embeddings import GooglePalmEmbeddings
+# from langchain_community.embeddings import GooglePalmEmbeddings
 from langchain_community.vectorstores.chroma import Chroma
 from langchain_google_genai import ChatGoogleGenerativeAI
-# from langchain_google_genai.embeddings import GoogleGenerativeAIEmbeddings
+from langchain_google_genai.embeddings import GoogleGenerativeAIEmbeddings
 
 CHROMA_DB_PATH = "database/chroma"
 PROMPT_TEMPLATE = """
@@ -41,10 +41,10 @@ def main():
     # print(f"Query text: {query_text}")
 
     # load the database created earlier
-    # embedding_function = GoogleGenerativeAIEmbeddings(
-    #     model="models/embedding-001", google_api_key=api_key
-    # )
-    embedding_function = GooglePalmEmbeddings(google_api_key=api_key)
+    embedding_function = GoogleGenerativeAIEmbeddings(
+        model="models/embedding-001", google_api_key=api_key
+    )
+    # embedding_function = GoogleGenerativeAIEmbeddings(google_api_key=api_key)
     db = Chroma(persist_directory=CHROMA_DB_PATH, embedding_function=embedding_function)
 
     results = db.similarity_search_with_relevance_scores(query_text, k=3)

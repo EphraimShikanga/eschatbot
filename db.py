@@ -12,10 +12,10 @@ from dotenv import load_dotenv
 from langchain.schema import Document
 from langchain_community.document_loaders import DirectoryLoader
 from langchain_community.vectorstores.chroma import Chroma
-# from langchain_google_genai.embeddings import GoogleGenerativeAIEmbeddings
+from langchain_google_genai.embeddings import GoogleGenerativeAIEmbeddings
 
 # import spacy
-from langchain_community.embeddings import GooglePalmEmbeddings
+# from langchain_community.embeddings import GooglePalmEmbeddings
 # from langchain.text_splitter import RecursiveCharacterTextSplitter
 
 DATA_PATH = "data/pdfs"
@@ -38,7 +38,7 @@ def save_to_chroma_db(chunks: list[Document]):
 
     db = Chroma.from_documents(
         chunks,
-        GooglePalmEmbeddings(google_api_key=api_key),
+        GoogleGenerativeAIEmbeddings(google_api_key=api_key, model="models/embedding-001"),
         persist_directory=CHROMA_DB_PATH,
     )
     db.persist()

@@ -3,3 +3,6 @@ venv
 .env
 test
 back
+data
+idea.txt
+test.py
